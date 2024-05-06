@@ -1,7 +1,7 @@
 name: React Test
 on: push
 jobs:
-  run-test:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -14,3 +14,21 @@ jobs:
         run: npm ci
       - name: Run Tests
         run: npm test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Build App
+        run: npm run build
+      - name: Deploy
+        run: |
+          echo "Deployment Started"
+          echo "Deployment in Progress..."
+          echo "Deployment Completed"
